@@ -2,4 +2,21 @@ name: Continuos Integration
 
 on:
     pull_request:
-        branches: ['main']
+        branches: [ 'main' ]
+
+#Una serie de pasos que se van ejecutar en secuencia o en paralelo
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Descargar cambios
+                uses: actions/checkout@v4
+            -   name: Instalar Java
+                uses: actions/setup-java@v4
+                with:
+                    distribution: 'temurin'
+                    java-version: '17'
+            -   name: Instalar Gradle
+                uses: gradle/gradle-build-action@v3
+            -   name: Compilar con gradle
+                run: ./gradlew build
