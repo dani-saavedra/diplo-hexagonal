@@ -2,9 +2,11 @@ package co.edu.unisabana.example_hexagonal.domain.entity;
 
 import co.edu.unisabana.example_hexagonal.domain.exception.CuentaInactivaException;
 import co.edu.unisabana.example_hexagonal.domain.exception.SaldoInsuficienteException;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
 public class Cuenta {
 
     private final String numero;
