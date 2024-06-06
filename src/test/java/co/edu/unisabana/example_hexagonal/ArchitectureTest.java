@@ -23,12 +23,12 @@ public class ArchitectureTest {
         .noClasses()
         .that().resideInAPackage("..domain..")
         .should().dependOnClassesThat()
-        .resideInAPackage("..infraestructure..");
+        .resideInAPackage("..infrastructure..");
 
     @ArchTest
     public static final ArchRule applicationShouldNotHaveAnyDependenciesFromInfra = ArchRuleDefinition
         .noClasses()
         .that().resideInAPackage("..application..")
         .should().dependOnClassesThat()
-        .resideInAPackage("..infraestructure..");
+        .resideInAPackage("..infrastructure..");
 }

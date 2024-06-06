@@ -4,18 +4,20 @@ import co.edu.unisabana.example_hexagonal.application.exception.CuentaNoEncontra
 import co.edu.unisabana.example_hexagonal.application.usecase.TransferenciaVO;
 import co.edu.unisabana.example_hexagonal.domain.entity.Cuenta;
 import co.edu.unisabana.example_hexagonal.domain.repository.CuentaPort;
+import co.edu.unisabana.example_hexagonal.infrastructure.secundary.sql.orm.CuentaORM;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @AllArgsConstructor
-public class TransferenciaUseCase
+public class TransferenciaUseCase {
 
     private final CuentaPort cuentaGateway;
 
     //Terminando siendo un Delegate o Facade
     public void transferirDinero(TransferenciaVO transferencia) {
+
+        CuentaORM orm = new CuentaORM();
         //Consultar la Cuenta
         Cuenta origen = cuentaGateway.obtenerCuenta(transferencia.numCuentaOrigen());
         if (origen == null) {
@@ -25,6 +27,7 @@ public class TransferenciaUseCase
         if (destino == null) {
             throw new CuentaNoEncontradaException(transferencia.numCuentaDestino());
         }
+
         origen.retirarDinero(transferencia.monto());
         destino.depositarDinero(transferencia.monto());
 
