@@ -17,7 +17,7 @@ public class TransferenciaUseCase {
     //Terminando siendo un Delegate o Facade
     public void transferirDinero(TransferenciaVO transferencia) {
 
-        CuentaORM orm = new CuentaORM();
+        Cuenta orm = new Cuenta("",true,0,"");
         //Consultar la Cuenta
         Cuenta origen = cuentaGateway.obtenerCuenta(transferencia.numCuentaOrigen());
         if (origen == null) {
