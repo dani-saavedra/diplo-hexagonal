@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @AllArgsConstructor
-public class TransferenciaUseCase {
+public class TransferenciaUseCase
 
     private final CuentaPort cuentaGateway;
 
