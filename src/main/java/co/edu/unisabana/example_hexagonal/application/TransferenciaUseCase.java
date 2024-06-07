@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class TransferenciaUseCase {
-
     private final CuentaPort cuentaGateway;
 
     //Terminando siendo un Delegate o Facade

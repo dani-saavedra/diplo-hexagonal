@@ -32,3 +32,8 @@ jobs:
                 run: |
                     echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
                     echo "branches = ${{ steps.jacoco.outputs.branches }}"
+            -   name: SonarQube Scan
+                uses: sonarsource/sonarqube-scan-action@v2.1.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
+                env:
+                    SONAR_TOKEN: ${{ secrets.TOKEN }}
+                    SONAR_HOST_URL: ${{ secrets.URL_SONAR }}
