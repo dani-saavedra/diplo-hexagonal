@@ -20,3 +20,20 @@ jobs:
                 uses: gradle/gradle-build-action@v3
             -   name: Compilar con gradle
                 run: ./gradlew build
+            -   name: Generate JaCoCo badge
+                id: jacoco
+                uses: cicirello/jacoco-badge-generator@v2
+                with:
+                    badges-directory: badges
+                    generate-branches-badge: true
+                    generate-summary: true
+                    jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+            -   name: Log coverage percentages to workflow output
+                run: |
+                    echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+                    echo "branches = ${{ steps.jacoco.outputs.branches }}"
+            -   name: SonarQube Scan
+                uses: sonarsource/sonarqube-scan-action@v2.1.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
+                env:
+                    SONAR_TOKEN: ${{ secrets.TOKEN }}
+                    SONAR_HOST_URL: ${{ secrets.URL_SONAR }}
